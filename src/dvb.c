@@ -46,6 +46,7 @@
 #include <sys/types.h>
 #include "log.h"
 #include <sys/stat.h>
+#include "errors.h"
 
 static char *log_module="DVB: ";
 
