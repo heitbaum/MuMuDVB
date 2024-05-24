@@ -460,6 +460,9 @@ int card_read(int fd_dvr, unsigned char *dest_buffer, card_buffer_t *card_buffer
 		{
 			log_message( log_module,  MSG_WARN,"Error : DVR buffer overrun \n");
 			card_buffer->overflow_number++;
+		} else if (errno==ENODEV || errno==EFAULT || errno==EBADF) {
+        		log_message( log_module,  MSG_ERROR,"Error : DVR device unrecoverable error : %s\n",strerror(errno));
+        		exit (ERROR_GENERIC);
 		} else if(errno!=EAGAIN)
 			log_message( log_module,  MSG_WARN,"Error : DVR Read error : %s \n",strerror(errno));
 		return 0;
